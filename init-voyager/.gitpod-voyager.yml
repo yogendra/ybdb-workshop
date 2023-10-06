@@ -1,0 +1,78 @@
+image:
+  file: .ybdb.Dockerfile
+tasks:
+  - name: ybdb
+    env:
+      DATA_PATH: ybdb
+    command: |
+      mkdir -p ${GITPOD_REPO_ROOT}/${DATA_PATH}
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/${DATA_PATH} --advertise_address=$HOST --cloud_location=ybcloud.pandora.az1 --background=true
+
+  - name: init-services
+    env:
+      ART_PATH: init-voyager
+    init: |
+      docker compose -f ${ART_PATH}/compose.yml pull
+    command: |
+      docker compose -f ${ART_PATH}/compose.yml up
+
+  - name: mysql
+    env:
+      SRC_USER: root
+      SRC_SECRET: 'yugabyte'
+    init: |
+      sudo apt-get update
+      sudo apt-get install -y mysql-client
+    command: |
+      gp ports await 3306
+      mysql -h ${HOST} -P 3306 -u ${SRC_USER} -p${SRC_SECRET}
+
+  - name: yb-voyager
+    env:
+      DATA_PATH: voyager-data
+      SCHEMA: public
+      SRC_DB_TYPE: mysql
+      SRC_DB_ID: 'Chinook'
+      SRC_USER: root
+      SRC_SECRET: 'yugabyte'
+      TARGET_DB_ID: yugabyte
+      TARGET_USER: yugabyte
+      TARGET_SECRET: yugabyte
+    command: |
+      mkdir -p ${GITPOD_REPO_ROOT}/voyager-data
+      wget -O ./yb-voyager https://raw.githubusercontent.com/yugabyte/yb-voyager/main/docker/yb-voyager-docker && chmod +x ./yb-voyager && sudo mv yb-voyager /usr/local/bin/yb-voyager
+      gp ports await 3306
+
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+
+# exposed ports
+ports:
+  - port: 7000
+    name: yb-master-web
+    onOpen: ignore
+  - port: 9000
+    name: yb-tserver-web
+    onOpen: ignore
+  - port: 7100
+    name: yb-master-rpc
+    onOpen: ignore
+  - port: 9100
+    name: yb-tserver-rpc
+    onOpen: ignore
+  - port: 5433
+    name: ysql
+    onOpen: ignore
+  - port: 13000
+    name: ysql-api
+    onOpen: ignore
+  - port: 9042
+    name: ycql
+    onOpen: ignore
+  - port: 12000
+    name: ycql-api
+    onOpen: ignore
+  - port: 3306
+    name: mysql
+    onOpen: ignore

@@ -1,0 +1,2 @@
+CREATE DATABASE ybdbapp;
+CREATE ROLE ybdbapp WITH LOGIN;

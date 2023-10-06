@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.1
+    restart: always
+    network_mode: host
+    environment:
+      MYSQL_ROOT_PASSWORD: 'yugabyte'
+      MYSQL_INIT_COMMAND: "--skip-grant-tables"
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+  voyager:
+    image: yugabytedb/yb-voyager:latest
+    command: "echo Hello from yb-voyager!"
+volumes:
+  mysql-data:
