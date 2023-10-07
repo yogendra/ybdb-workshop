@@ -22,8 +22,8 @@ cp init-dsql/.gitpod-dsql.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "dsql base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 
 ## Query tuning tips and tricks
 [sql universe:](init-qt/README.md)
@@ -34,8 +34,8 @@ cp init-qt/.gitpod-qt.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "qt base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 
 ## Development innerloop workflow
 [inner loop:](init-iloop/README.md)
@@ -46,8 +46,8 @@ cp init-iloop/.gitpod-iloop.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "il base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 
 ## Java microservices
 [java microservices:](https://github.com/srinivasa-vasu/yb-ms-data)
@@ -66,8 +66,8 @@ cp init-voyager/.gitpod-voyager.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "voyager base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 
 ## Change data capture(CDC) workflow from ybdb to postgres
 [cdc:](init-cdc/README.md)
@@ -78,8 +78,8 @@ cp init-cdc/.gitpod-cdc.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "cdc base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 
 ## Change data capture(CDC) streaming workflow from ysql to ycql
 [cdc-stream:](https://github.com/srinivasa-vasu/yb-cdc-streams)
@@ -94,8 +94,8 @@ cp init-scale/.gitpod-scale.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "scale base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 
 ## Data replication, fault tolerance and high availability
 [chaos engineering:](init-ft/README.md)
@@ -106,5 +106,5 @@ cp init-ft/.gitpod-ft.yml .gitpod.yml
 git add .gitpod.yml
 git commit -m "ft base"
 git push origin main
-Launch "https://gitpod.io/#https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git" in browser
 ```
+Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
