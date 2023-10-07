@@ -10,6 +10,9 @@
 - Run `git clone https://github.com/[REPLACE_REPO_NAME]/ybdb-vanguard.git` to clone the forked repo to the local workstation
 - Run `cd ybdb-vanguard` to change the directory to the cloned repo
 
+## Getting Started with Gitpod:
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/...)
+
 ## Into the distributed sql and postgres++ universe
 [distributed sql:](init-dsql/README.md)
 This will help you get started with yugabyte db and explore the distributed sql universe.
