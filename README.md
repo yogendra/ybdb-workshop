@@ -11,7 +11,7 @@
 - Run `cd ybdb-vanguard` to change the directory to the cloned repo
 
 ## Getting Started with Gitpod:
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/...)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/from-referrer/)
 
 ## Into the distributed sql and postgres++ universe
 [distributed sql:](init-dsql/README.md)
