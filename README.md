@@ -84,7 +84,7 @@ This will explore the java microservices like spring boot, quarkus, and micronau
 [testcontainers:](https://github.com/srinivasa-vasu/ybdb-boot-data)
 This will explore the java testcontainers integration with yugabytedb.
 
-## Securing Spring Boot Microservices with YugabyteDB and Secret Managers
+## Securing Spring Boot Microservices
 <div align="left">
 
 ![Dev](https://img.shields.io/badge/dev-orange?style=for-the-badge)
