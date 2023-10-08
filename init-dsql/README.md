@@ -1,4 +1,4 @@
-## Into the distributed sql and postgres++ universe
+## Into the distributed and postgres++ sql universe
 
 Run the following from `ysqlsh` shell
 

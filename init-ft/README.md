@@ -1,4 +1,4 @@
-## ybdb node and availability zone failures
+## Data replication, fault tolerance and high availability
 
 Observe the running application metrics in `ysql-load` and `ycql-load` shells
 

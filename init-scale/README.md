@@ -1,4 +1,4 @@
-## ybdb scale out
+## Data sharding and horizontal scalability
 
 Observe the running application metrics in `ysql-load` and `ycql-load` shells
 
