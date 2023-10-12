@@ -30,6 +30,13 @@ tasks:
     command: |
       gp sync-await load-app && gp sync-await ybdb && sleep 2
       java -jar ./yb-sample-apps.jar --workload SqlInserts --num_reads 15000000 --num_writes 2000000 --num_threads_read 5 --num_threads_write 2 --nodes ${HOST_LB}:${YSQL_SOCK},${HOST_LB2}:${YSQL_SOCK},${HOST_LB3}:${YSQL_SOCK} --password ${SECRET} --username ${USER}
+  - name: ysql-scale-out
+    env:
+      SECRET: yugabyte
+      USER: yugabyte
+    command: |
+      gp sync-await scale-out && sleep 2
+      java -jar ./yb-sample-apps.jar --workload SqlSecondaryIndex --num_reads 15000000 --num_writes 2000000 --num_threads_read 5 --num_threads_write 2 --nodes ${HOST_LB}:${YSQL_SOCK},${HOST_LB2}:${YSQL_SOCK},${HOST_LB3}:${YSQL_SOCK} --password ${SECRET} --username ${USER}
   - name: ycql-load
     env:
       SECRET: yugabyte

@@ -38,6 +38,8 @@ PROMPT_TIMEOUT=0
 
 pe "yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd6 --advertise_address=\$HOST_LB6 --join=\$HOST_LB --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone"
 
+gp sync-done scale-out
+
 PROMPT_TIMEOUT=1
 
 p "${MSG}"
