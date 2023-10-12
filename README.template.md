@@ -182,7 +182,7 @@ Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 | Java Microservice                                             |                                                |
 | Java testcontainers                                           |                                                |
 | Securing Spring Boot Microservices                            |                                                |
-| Data migration workflow from mysql to ybdb                    | [![Open in Gitpod][gitpod-svg]][voyage-branch] |
+| Data migration workflow from mysql to ybdb                    | [![Open in Gitpod][gitpod-svg]][voyager-branch] |
 | Change data capture(CDC) workflow from ybdb to postgres       | [![Open in Gitpod][gitpod-svg]][cdc-branch]    |
 | Change data capture(CDC) streaming workflow from ysql to ycql |                                                |
 | Data distribution and scalability                             | [![Open in Gitpod][gitpod-svg]][scale-branch]  |
