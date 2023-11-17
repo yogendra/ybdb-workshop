@@ -3,7 +3,7 @@ set -Eeuo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PROJECT_DIR=$(cd $SCRIPT_DIR/..; pwd)
 SCRIPT=$0
-WS_BRANCHES=$(git branch | grep ws- | tr -d ' ')
+WS_BRANCHES="$(git branch | grep ws- | tr -d ' ')"
 function workshop-update-gitpod-yml(){
     update-branch-file main init-dsql/.gitpod-dsql.yml ws-dsql .gitpod.yml
     update-branch-file main init-cdc/.gitpod-cdc.yml ws-cdc .gitpod.yml
