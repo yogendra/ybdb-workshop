@@ -43,7 +43,7 @@ tasks:
 
   - name: az-fd
     env:
-      SCRIPT_PATH: init-ft
+      SCRIPT_PATH: ws/ft
     before: |
       sudo apt-get install pv -y
       curl -ssLo ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/pscript https://raw.githubusercontent.com/paxtonhare/demo-magic/master/demo-magic.sh
