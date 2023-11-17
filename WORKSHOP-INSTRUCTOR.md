@@ -1,6 +1,6 @@
 # Workshop Instructor Guide
 
-[![Open in Gitpod][logo-gitpod]][gp-workshop]
+[![Open in Gitpod][logo-gitpod]][gp-workshop] 
 
 This repository has multiple branch. Each branch is setup to be opened in Gitpod.
 All workshops are listed on main [README.md](README.md). Main goal is to run everything in workshop on cloud and require almost no local resources.
