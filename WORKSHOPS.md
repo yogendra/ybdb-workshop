@@ -21,14 +21,15 @@
 | ![Ops][badge-ops]                  | Data distribution and scalability                             | [![Open in Gitpod][logo-gitpod]][branch-scale]       |
 | ![Ops][badge-ops]                  | Data replication, fault tolerance and high availability       | [![Open in Gitpod][logo-gitpod]][branch-ft]          |
 
+
 [badge-dev]: https://img.shields.io/badge/dev-orange?style=for-the-badge
 [badge-ops]: https://img.shields.io/badge/ops-blue?style=for-the-badge
 [branch-cdc]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-cdc
-[branch-dsql]: https://gitpod.io/https://github.com/yogendra/ybdb-workshop/tree/ws-dsql
+[branch-dsql]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-dsql
 [branch-ft]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-ft
 [branch-iloop]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-iloop
 [branch-main]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/main
-[branch-qt]: https://gitpod.io/https://github.com/yogendra/ybdb-workshop/tree/ws-qt
+[branch-qt]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-qt
 [branch-scale]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-scale
 [branch-voyager]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws-voyager
 [logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
