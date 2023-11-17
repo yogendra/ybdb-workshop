@@ -30,13 +30,17 @@ function update-branch-file(){
   SRC_FILE=$1; shift
   DEST_BRANCH=$1;shift
   DEST_FILE=$1; shift
-  DESC=${1:-"syncing $SRC_BRANCH/$SRC_FILE to $DEST_BRANCH/$DEST_FILE"}
+  DESC="syncing $SRC_BRANCH/$SRC_FILE to $DEST_BRANCH/$DEST_FILE"
+
   cbranch=$(git rev-parse --abbrev-ref HEAD)
   git checkout $DEST_BRANCH
   git checkout $SRC_BRANCH $SRC_FILE
   cp $SRC_FILE $DEST_FILE
-  git add $SRC_FILE $DEST_FILE
-  git commit -m "$DESC"
+
+  if [[ `git status --porcelain` ]]; then
+    git add $SRC_FILE $DEST_FILE
+    git commit -m "$DESC"
+  fi
   git checkout $cbranch
 }
 
