@@ -41,7 +41,7 @@ tasks:
       gp sync-done kafka-run
   - name: init-postgres
     env:
-      DATA_PATH: init-cdc
+      DATA_PATH: ws/cdc
     init: |
       docker compose -f ${DATA_PATH}/compose.yml pull
     command: |
@@ -59,7 +59,7 @@ tasks:
       psql
   - name: ysqlsh
     env:
-      DATA_PATH: init-cdc
+      DATA_PATH: ws/cdc
     before: |
       gp ports await ${YSQL_SOCK} && sleep 2
       ysqlsh -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/chinook.sql
