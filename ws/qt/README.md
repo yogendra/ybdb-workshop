@@ -1,5 +1,7 @@
 ## Query tuning tips and tricks
 
+[Back to Workshop Home](../../README.md)
+
 ### explain plan
 ```
 \set ea 'explain(analyze, dist, verbose, costs, buffers, timing, summary)'
@@ -272,3 +274,6 @@ from report_sal_per_dept
 where sal_per_dept <= 10000
 order by sal_per_dept;
 ```
+
+
+[Back to Workshop Home](../../README.md)
