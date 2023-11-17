@@ -47,7 +47,7 @@ function update-branch-file(){
   git checkout $DEST_BRANCH
   git checkout $SRC_BRANCH $SRC_FILE
   [[ -d $(dirname $DEST_FILE) ]] || mkdir -p $(dirname $DEST_FILE)
-  cp $SRC_FILE $DEST_FILE
+  [[ $SRC_FILE == $DEST_FILE ]] || cp $SRC_FILE $DEST_FILE
 
   if [[ $(git status --porcelain) ]]; then
     git add $SRC_FILE $DEST_FILE
