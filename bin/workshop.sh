@@ -57,7 +57,15 @@ function branch-file-update(){
   fi
   git checkout $cbranch
 }
-
+function workshop-branch-asset-updates(){
+  echo branch-dir-update main init-dsql/ ws-dsql
+  echo branch-dir-update main init-cdc/ ws-cdc
+  echo branch-dir-update main init-ft/ ws-ft
+  echo branch-dir-update main init-iloop/ ws-iloop
+  echo branch-dir-update main init-qt/ ws-qt
+  echo branch-dir-update main init-scale/ ws-scale
+  echo branch-dir-update main init-voyager/ ws-voyager
+}
 function branch-dir-update(){
   SRC_BRANCH=$1;shift
   SRC_DIR=$1;shift
