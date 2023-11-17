@@ -142,3 +142,6 @@ ports:
   - port: 5432
     name: postgres
     onOpen: ignore
+  - port: 15433
+    name: yugabyted-ui
+    onOpen: ignore
