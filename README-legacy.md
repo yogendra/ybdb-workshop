@@ -20,11 +20,11 @@
 ![Ops](https://img.shields.io/badge/ops-blue?style=for-the-badge)
 </div>
 
-[distributed sql:](init-dsql/README.md)
+[distributed sql:](ws/dsql/README.md)
 This will help you get started with yugabyte db and explore the distributed sql universe.
 
 ```bash
-yes | cp init-dsql/.gitpod-dsql.yml .gitpod.yml
+yes | cp ws/dsql/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "dsql base"
 git push origin main
@@ -38,11 +38,11 @@ Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 ![Ops](https://img.shields.io/badge/ops-blue?style=for-the-badge)
 </div>
 
-[sql universe:](init-qt/README.md)
+[sql universe:](ws/qt/README.md)
 This will help you get started with query tuning and have a better understanding of the distributed sql universe.
 
 ```bash
-yes | cp init-qt/.gitpod-qt.yml .gitpod.yml
+yes | cp ws/qt/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "qt base"
 git push origin main
@@ -55,11 +55,11 @@ Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 ![Dev](https://img.shields.io/badge/dev-orange?style=for-the-badge)
 </div>
 
-[inner loop:](init-iloop/README.md)
+[inner loop:](ws/iloop/README.md)
 This will explore the development innerloop workflow and guide bulding an application from scratch. This provides a hands-on experience of interacting with yugabyte db.
 
 ```bash
-yes | cp init-iloop/.gitpod-iloop.yml .gitpod.yml
+yes | cp ws/iloop/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "il base"
 git push origin main
@@ -100,11 +100,11 @@ This will explore securing Spring Boot application with YugabyteDB over TLS usin
 ![Ops](https://img.shields.io/badge/ops-blue?style=for-the-badge)
 </div>
 
-[voyager:](init-voyager/README.md)
+[voyager:](ws/voyager/README.md)
 This will explore the voyager tool to migrate mysql to yugabytedb.
 
 ```bash
-yes | cp init-voyager/.gitpod-voyager.yml .gitpod.yml
+yes | cp ws/voyager/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "voyager base"
 git push origin main
@@ -118,11 +118,11 @@ Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 ![Ops](https://img.shields.io/badge/ops-blue?style=for-the-badge)
 </div>
 
-[cdc:](init-cdc/README.md)
+[cdc:](ws/cdc/README.md)
 This will explore yugabytedb's change data capture.
 
 ```bash
-yes | cp init-cdc/.gitpod-cdc.yml .gitpod.yml
+yes | cp ws/cdc/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "cdc base"
 git push origin main
@@ -144,11 +144,11 @@ This will explore spring cloud stream microservices based cdc integration from y
 ![Ops](https://img.shields.io/badge/ops-blue?style=for-the-badge)
 </div>
 
-[scale out:](init-scale/README.md)
+[scale out:](ws/scale/README.md)
 This will explore yugabytedb's data distribution and horizontal scalability.
 
 ```bash
-yes | cp init-scale/.gitpod-scale.yml .gitpod.yml
+yes | cp ws/scale/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "scale base"
 git push origin main
@@ -161,11 +161,11 @@ Launch the repo using [Open in Gitpod](#getting-started-with-gitpod) action.
 ![Ops](https://img.shields.io/badge/ops-blue?style=for-the-badge)
 </div>
 
-[chaos engineering:](init-ft/README.md)
+[chaos engineering:](ws/ft/README.md)
 This will explore yugabytedb's fault tolerance and high availability.
 
 ```bash
-yes | cp init-ft/.gitpod-ft.yml .gitpod.yml
+yes | cp ws/ft/.gitpod.yml .gitpod.yml
 git add .gitpod.yml
 git commit -sm "ft base"
 git push origin main
