@@ -10,7 +10,7 @@ tasks:
   - name: ysqlsh
     command: |
       gp ports await ${YSQL_SOCK} && sleep 2
-      ysqlsh -f ${GITPOD_REPO_ROOT}/init-iloop/init.sql
+      ysqlsh -f ${GITPOD_REPO_ROOT}/ws/iloop/init.sql
       ysqlsh
   - name: dev-inner-loop
     env:
