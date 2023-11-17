@@ -14,9 +14,20 @@ function workshop-update-gitpod-yml(){
     update-branch-file main init-scale/.gitpod-scale.yml ws-scale .gitpod.yml
     update-branch-file main init-voyager/.gitpod-voyager.yml ws-voyager .gitpod.yml
 }
+function workshop-update-dockerfile(){
+    set +x
+    update-branch-file main .ybdb.Dockerfile ws-dsql .ybdb.Dockerfile
+    update-branch-file main .ybdb.Dockerfile ws-cdc .ybdb.Dockerfile
+    update-branch-file main .ybdb.Dockerfile ws-ft .ybdb.Dockerfile
+    update-branch-file main .ybdb.Dockerfile ws-iloop .ybdb.Dockerfile
+    update-branch-file main .ybdb.Dockerfile ws-qt .ybdb.Dockerfile
+    update-branch-file main .ybdb.Dockerfile ws-scale .ybdb.Dockerfile
+    update-branch-file main .ybdb.Dockerfile ws-voyager .ybdb.Dockerfile
+}
+
 function _help(){
   cat <<EOF
-yugabyteDB Workshop Intstructor Utility
+YugabyteDB Workshop Intstructor Utility
 $SCRIPT <COMMANDS> [parameters...]
 
 COMAMNDS
@@ -35,9 +46,10 @@ function update-branch-file(){
   cbranch=$(git rev-parse --abbrev-ref HEAD)
   git checkout $DEST_BRANCH
   git checkout $SRC_BRANCH $SRC_FILE
+  [[ -d $(dirname $DEST_FILE) ]] || mkdir -p $(dirname $DEST_FILE)
   cp $SRC_FILE $DEST_FILE
 
-  if [[ `git status --porcelain` ]]; then
+  if [[ $(git status --porcelain) ]]; then
     git add $SRC_FILE $DEST_FILE
     git commit -m "$DESC"
   fi
