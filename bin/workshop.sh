@@ -30,19 +30,27 @@ $SCRIPT <COMMANDS> [parameters...]
 
 COMAMNDS
   workshop-update-gitpod-yml - helps in updating workshop in the branches
-
 EOF
 }
+function ws-branches-recreate(){
+  echo "$WS_BRANCHES" | while read WS_BRANCH
+  do
+    git branch -D $WS_BRANCH
+    git push origin -d $WS_BRANCH
+  done
 
-
+  find ws -type d | grep -v 'ws$' | while read WS_BRANCH
+  do
+    git branch $WS_BRANCH
+    branch-file-update main "$WS_BRANCH/.gitpod.yml" "$WS_BRANCH" ".gitpod.yml"
+    git push origin $WS_BRANCH
+  done
+}
 function workshop-branch-asset-updates(){
-  echo branch-dir-update main init-dsql/ ws-dsql
-  echo branch-dir-update main init-cdc/ ws-cdc
-  echo branch-dir-update main init-ft/ ws-ft
-  echo branch-dir-update main init-iloop/ ws-iloop
-  echo branch-dir-update main init-qt/ ws-qt
-  echo branch-dir-update main init-scale/ ws-scale
-  echo branch-dir-update main init-voyager/ ws-voyager
+  echo "$WS_BRANCHES" | while read DEST_BRANCH
+  do
+    echo branch-dir-update main $DEST_BRANCH $DEST_BRANCH
+  done
 }
 function branch-file-update(){
   SRC_BRANCH=$1;shift
