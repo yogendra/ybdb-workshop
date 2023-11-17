@@ -21,7 +21,7 @@ function branch-file-update-inplace(){
     file=$1
     echo "$WS_BRANCHES" | while read DEST_BRANCH
     do
-      update-branch-file main "$file" "$DEST_BRANCH" "$file"
+      branch-file-update main "$file" "$DEST_BRANCH" "$file"
     done
 }
 
