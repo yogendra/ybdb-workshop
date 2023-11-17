@@ -38,7 +38,7 @@ COMAMNDS
                                   example:
                                     gitpod-workspace-image-build 2.20.0.0 docker.io/my-user
 
-                                    Image name: docker.io/my-user/ybdb-workshop-workspace:2.20.0.0-b76
+                                    Image name: docker.io/my-user/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 
 
 EOF
@@ -110,12 +110,9 @@ function gitpod-workspace-image-build(){
   image_tag=$release
   export tags=""
   if [[ $# -gt 0 ]]; then
-    export tags=$(echo $* | tr ' ' '\n' | sed "s/^/ -t /;s/$/:$image_tag/"|tr -d '\n')
-      # tags="$tags -t $repo/ybdb-workshop-gitpod-workspace:$image_tag"
-      # echo "$tags"
-    # done
+    export tags=$(echo $* | tr ' ' '\n' | sed "s/^/ -t /;s#\$#/ybdb-workshop-gitpod-ws:$image_tag#"|tr -d '\n')
   else
-    export tags="-t yogendra/ybdb-workshop-gitpod-workspace:$image_tag"
+    export tags="-t yogendra/ybdb-workshop-gitpod-ws:$image_tag"
   fi
 
   docker buildx build --platform linux/x86_64 --build-arg YB_RELEASE=$release -f .ybdb.Dockerfile $tags --push $PROJECT_DIR
