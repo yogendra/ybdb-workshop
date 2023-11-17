@@ -5,7 +5,7 @@
 #### Step 0: Load data
 Run only Step 0 from `mysql` shell
 ```
-source init-voyager/chinook.sql
+source ws/voyager/chinook.sql
 ```
 
 Run Step 1 to Step 7 from `yb-voyager` shell
