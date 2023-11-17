@@ -76,3 +76,6 @@ ports:
   - port: 3306
     name: mysql
     onOpen: ignore
+  - port: 15433
+    name: yugabyted-ui
+    onOpen: ignore
