@@ -40,7 +40,7 @@ tasks:
 
   - name: ybdb-scale
     env:
-      SCRIPT_PATH: init-scale
+      SCRIPT_PATH: ws/scale
     before: |
       sudo apt-get install pv -y
       curl -ssLo ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/pscript https://raw.githubusercontent.com/paxtonhare/demo-magic/master/demo-magic.sh
