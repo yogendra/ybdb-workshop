@@ -1,5 +1,4 @@
-image:
-  file: .ybdb.Dockerfile
+image: yogendra/ybdb-workshop-gitpod-ws:2.18.4.0-b52
 tasks:
   - name: ybdb
     command: |
