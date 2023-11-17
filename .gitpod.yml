@@ -51,3 +51,6 @@ ports:
   - port: 12000
     name: ycql-api
     onOpen: ignore
+  - port: 15433
+    name: yugabyted-ui
+    onOpen: ignore
