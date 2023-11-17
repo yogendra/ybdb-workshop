@@ -19,7 +19,7 @@ function workshop-update-dockerfile(){
 
 function workshop-update-file-inplace(){
     file=$1
-    echo $WS_BRANCHES | while read DEST_BRANCH
+    echo "$WS_BRANCHES" | while read DEST_BRANCH
     do
       echo update-branch-file main "$file" "$DEST_BRANCH" "$file"
     done
