@@ -1,7 +1,6 @@
 FROM gitpod/workspace-full
 
-ARG YB_VERSION=2.20.0.0
-ARG YB_BUILD=76
+ARG YB_RELEASE=2.20.0.0-b76
 ARG YB_BIN_PATH=/usr/local/yugabyte
 ARG ROLE=gitpod
 
@@ -13,7 +12,10 @@ RUN sudo mkdir -p $YB_BIN_PATH
 RUN sudo chown -R $ROLE:$ROLE /usr/local/yugabyte
 
 # fetch the binary
-RUN curl -sSLo ./yugabyte.tar.gz https://downloads.yugabyte.com/releases/${YB_VERSION}/yugabyte-${YB_VERSION}-b${YB_BUILD}-linux-x86_64.tar.gz \
+RUN set -e && \
+  export YB_RELEASE=${YB_RELEASE} && \
+  export YB_VERSION=${YB_RELEASE%-*} && \
+  curl -sSLo ./yugabyte.tar.gz https://downloads.yugabyte.com/releases/${YB_VERSION}/yugabyte-${YB_RELEASE}-linux-x86_64.tar.gz \
   && tar -xvf yugabyte.tar.gz -C $YB_BIN_PATH --strip-components=1 \
   && chmod +x $YB_BIN_PATH/bin/* \
   && rm ./yugabyte.tar.gz
