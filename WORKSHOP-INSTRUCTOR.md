@@ -1,5 +1,7 @@
 # Workshop Instructor Guide
 
+[![Open in Gitpod][logo-gitpod]][gp-workshop]
+
 This repository has multiple branch. Each branch is setup to be opened in Gitpod.
 All workshops are listed on main [README.md](README.md). Main goal is to run everything in workshop on cloud and require almost no local resources.
 
@@ -62,8 +64,11 @@ You want to update the `ws/dsql/README.md` with additional steps, sqls, intructi
   - [ybdb-workshop-ms-data][repo-ms-data]
   - [ybdb-workshop-sealed-secrets][repo-sealed-secrets]
 
+
+[gp-workshop]: https://gitpod.io/# https://github.com/yogendra/ybdb-workshop 
 [repo-workshop]: https://github.com/yogendra/ybdb-workshop
-[repo-boot-data]:https://github.com/yogendra/ybdb-workshop-boot-data
+[repo-boot-data]: https://github.com/yogendra/ybdb-workshop-boot-data
 [repo-cdc-streams]: https://github.com/yogendra/ybdb-workshop-cdc-streams
 [repo-ms-data]: https://github.com/yogendra/ybdb-workshop-ms-data
 [repo-sealed-secrets]: https://github.com/yogendra/ybdb-workshop-sealed-secrets
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
