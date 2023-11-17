@@ -11,7 +11,7 @@ tasks:
       gp sync-done ybdb
   - name: ysqlsh
     env:
-      DATA_PATH: "init-qt"
+      DATA_PATH: "ws/qt"
     command: |
       gp sync-await ybdb && sleep 2
       ysqlsh -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/chinook.sql -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/sample.sql
