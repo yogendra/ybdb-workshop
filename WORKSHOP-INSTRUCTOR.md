@@ -1,5 +1,6 @@
 # Workshop Instructor Guide
 
+
 [![Open in Gitpod][logo-gitpod]][gp-workshop] 
 
 This repository has multiple branch. Each branch is setup to be opened in Gitpod.
@@ -65,7 +66,7 @@ You want to update the `ws/dsql/README.md` with additional steps, sqls, intructi
   - [ybdb-workshop-sealed-secrets][repo-sealed-secrets]
 
 
-[gp-workshop]: https://gitpod.io/# https://github.com/yogendra/ybdb-workshop 
+[gp-workshop]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop 
 [repo-workshop]: https://github.com/yogendra/ybdb-workshop
 [repo-boot-data]: https://github.com/yogendra/ybdb-workshop-boot-data
 [repo-cdc-streams]: https://github.com/yogendra/ybdb-workshop-cdc-streams
