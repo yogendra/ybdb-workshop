@@ -59,6 +59,7 @@ You want to update the `ws/dsql/README.md` with additional steps, sqls, intructi
   - [README.md](README.md)
   - [README-legacy.md](README-legacy.md)
   - [WORKSHOP-INSTRUCTOR.md](WORKSHOP-INSTRUCTOR.md) (this file)
+  - If you build a custom image, update image reference in all .gitpod.yml
 - Fork this other repos
   - [ybdb-workshop-boot-data][repo-boot-data]
   - [ybdb-workshop-cdc-streams][repo-cdc-streams]
