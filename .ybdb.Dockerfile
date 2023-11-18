@@ -12,10 +12,13 @@ RUN sudo mkdir -p $YB_BIN_PATH
 RUN sudo chown -R $ROLE:$ROLE /usr/local/yugabyte
 
 # fetch the binary
-RUN set -e && \
-  export YB_RELEASE=${YB_RELEASE} && \
-  export YB_VERSION=${YB_RELEASE%-*} && \
-  curl -sSLo ./yugabyte.tar.gz https://downloads.yugabyte.com/releases/${YB_VERSION}/yugabyte-${YB_RELEASE}-linux-x86_64.tar.gz \
+RUN set -e \
+  && export YB_RELEASE=${YB_RELEASE} \
+  && export YB_VERSION=${YB_RELEASE%-*} \
+  && export YB_OS=linux \
+  && export YB_ARCH=x86_64 \
+  && if [[ $(uname -m) == aarch64  ]]; then export YB_OS=el8 YB_ARCH=aarch64 ; fi \
+  && curl -sSLo ./yugabyte.tar.gz https://downloads.yugabyte.com/releases/${YB_VERSION}/yugabyte-${YB_RELEASE}-${YB_OS}-${YB_ARCH}.tar.gz \
   && tar -xvf yugabyte.tar.gz -C $YB_BIN_PATH --strip-components=1 \
   && chmod +x $YB_BIN_PATH/bin/* \
   && rm ./yugabyte.tar.gz
