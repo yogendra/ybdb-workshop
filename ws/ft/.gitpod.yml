@@ -1,4 +1,4 @@
-image: yogendra/ybdb-workshop-gitpod-ws:2.18.4.0-b52
+image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
     command: |
