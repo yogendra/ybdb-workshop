@@ -138,6 +138,8 @@ function  gitpod-workspace-test-container(){
     -p 12000:12000 \
     --name ybdb-gp-ws-test \
     --hostname ybdb-gp-ws-test \
+    -v $PWD:/workspace \
+    -v $PWD:/home/gitpod/workspace \
     $image \
     bash -l
 }
