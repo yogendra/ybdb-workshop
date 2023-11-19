@@ -489,20 +489,196 @@ Run the following from `ycqlsh` shell
     ycqlsh:demo>
     ```
 
+1. Try to createa an index (this will fail)
 
-# will fail
-create index on sample(v);
+    ```sql
+    create index on sample(v);
+    ```
 
-create table sample_01(k int, v int, t text, f float, d date, ts timestamp, tsz timestamp, u uuid, j jsonb, primary key(k, v)) with transactions = { 'enabled' : true };
+    Sample Output
 
-create index on sample_01(v);
+    ```sql
+    ycqlsh:demo> create index on sample(v);
+    InvalidRequest: Error from server: code=2200 [Invalid query] message="Invalid Table Definition. Transactions cannot be enabled in an index of a table without transactions enabled.
+    create index on sample(v);
+    ^^^^^^
+    (ql error -302)"
+    ```
 
-desc sample_01;
+    Above error shows that indexes require a transactional table
 
-create table sample_02(k int, v int, t text, f float, d date, ts timestamp, b boolean, tsz timestamp, u uuid, j jsonb, primary key(k, v)) with transactions = { 'enabled' : true } and tablets = 4;
+1. Lets create a table with transacitons
 
-create index on sample_02(v) with transactions = { 'enabled' : true } and tablets = 4;
+    ```sql
+    create table sample_01(
+        k int, 
+        v int, 
+        t text, 
+        f float, 
+        d date, 
+        ts timestamp, 
+        tsz timestamp, 
+        u uuid, 
+        j jsonb, 
+        primary key(k, v)
+    ) 
+    with transactions = { 'enabled' : true };
+    ```
 
-desc sample_02;
-```
+    Sample Output
+
+    ```sql
+    ycqlsh:demo> create table sample_01(
+            ...     k int, 
+            ...     v int, 
+            ...     t text, 
+            ...     f float, 
+            ...     d date, 
+            ...     ts timestamp, 
+            ...     tsz timestamp, 
+            ...     u uuid, 
+            ...     j jsonb, 
+            ...     primary key(k, v)
+            ... ) 
+            ... with transactions = { 'enabled' : true };
+    ycqlsh:demo>     
+    ```
+
+1. Lets create an index on this table
+
+    ```sql
+    create index on sample_01(v);
+    ```
+    
+    Sample Output
+
+    ```sql
+    ycqlsh:demo> create index on sample_01(v);
+    ycqlsh:demo> 
+    ```
+
+1. Describe that table
+
+    ```sql
+    desc sample_01;
+    ```
+    
+    Sample Output
+    
+    ```sql
+    ycqlsh:demo> desc sample_01;
+
+    CREATE TABLE demo.sample_01 (
+        k int,
+        v int,
+        t text,
+        f float,
+        d date,
+        ts timestamp,
+        tsz timestamp,
+        u uuid,
+        j jsonb,
+        PRIMARY KEY (k, v)
+    ) WITH CLUSTERING ORDER BY (v ASC)
+        AND default_time_to_live = 0
+        AND transactions = {'enabled': 'true'};
+    CREATE INDEX sample_01_v_idx ON demo.sample_01 (v, k)
+        WITH transactions = {'enabled': 'true'};
+
+    ycqlsh:demo> 
+    ```
+
+1. Create a table with customer tablet split
+
+    ```sql
+    create table sample_02(
+        k int, 
+        v int, 
+        t text, 
+        f float, 
+        d date, 
+        ts timestamp, 
+        b boolean, 
+        tsz timestamp, 
+        u uuid, 
+        j jsonb, 
+        primary key(k, v)
+    ) 
+    with transactions = { 'enabled' : true } 
+    and 
+    tablets = 4;    
+    ```
+    
+    Sample Output
+
+    ```sql
+    ycqlsh:demo> create table sample_02(
+            ...     k int, 
+            ...     v int, 
+            ...     t text, 
+            ...     f float, 
+            ...     d date, 
+            ...     ts timestamp, 
+            ...     b boolean, 
+            ...     tsz timestamp, 
+            ...     u uuid, 
+            ...     j jsonb, 
+            ...     primary key(k, v)
+            ... ) 
+            ... with transactions = { 'enabled' : true } 
+            ... and 
+            ... tablets = 4; 
+    ycqlsh:demo> 
+    ```
+
+1. Create an index on this table 
+
+    ```sql
+    create index on sample_02(v) 
+    with transactions = { 'enabled' : true } 
+    and 
+    tablets = 4;
+    ```
+
+    Sample Output
+
+    ```sql
+    ycqlsh:demo> create index on sample_02(v) 
+            ... with transactions = { 'enabled' : true } 
+            ... and 
+            ... tablets = 4;
+    ycqlsh:demo>     
+    ```
+
+1. Describe table to see the index information
+
+    ```sql
+    desc sample_02;
+    ```
+
+    Sample Output
+
+    ```sql
+    ycqlsh:demo> desc sample_02;
+
+    CREATE TABLE demo.sample_02 (
+        k int,
+        v int,
+        t text,
+        f float,
+        d date,
+        ts timestamp,
+        b boolean,
+        tsz timestamp,
+        u uuid,
+        j jsonb,
+        PRIMARY KEY (k, v)
+    ) WITH CLUSTERING ORDER BY (v ASC)
+        AND default_time_to_live = 0
+        AND tablets = 4
+        AND transactions = {'enabled': 'true'};
+    CREATE INDEX sample_02_v_idx ON demo.sample_02 (v, k)
+        WITH tablets = 4
+        AND transactions = {'enabled': 'true'};
+    ```
 [Back to Workshop Home](../../README.md)
