@@ -20,7 +20,7 @@
 | ![Dev][badge-dev]                  | [Change data capture(CDC) streaming workflow from ysql to ycql][doc-cdc-streams] | [![Open in Gitpod][logo-gitpod]][gp-cdc-streams]   |
 | ![Ops][badge-ops]                  | [Data distribution and scalability][doc-scale]                                   | [![Open in Gitpod][logo-gitpod]][gp-scale]         |
 | ![Ops][badge-ops]                  | [Data replication, fault tolerance and high availability][doc-ft]                | [![Open in Gitpod][logo-gitpod]][gp-ft]            |
-
+<!-- Add workshop  here -->
 
 
 [badge-dev]: https://img.shields.io/badge/dev-orange?style=for-the-badge
