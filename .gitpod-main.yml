@@ -16,7 +16,6 @@ tasks:
     command: |
       gp ports await ${YCQL_SOCK} && sleep 2
       ycqlsh
-
 vscode:
   extensions:
     - ms-azuretools.vscode-docker
