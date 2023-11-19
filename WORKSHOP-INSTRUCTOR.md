@@ -1,61 +1,76 @@
 # Workshop Instructor Guide
 
 
-[![Open in Gitpod][logo-gitpod]][gp-workshop] 
+[![Open in Gitpod][logo-gitpod]][gp-workshop]
 
-This repository has multiple branch. Each branch is setup to be opened in Gitpod.
-All workshops are listed on main [README.md](README.md). Main goal is to run everything in workshop on cloud and require almost no local resources.
+- This is a central repository for all experience workshops for YugabyteDB.
+- All workshops are designed to be self contained and run on [gitpod](https://gitpod.io).
+- Every workshop should be run in their own gitpod workspace.
+- Attendees should launch workshops from the [README.md](README.md) page
 
-## Branches
 
-- *main* : Main branch which is central to the workshop. All assets should be created and update on this branch
-- *ws/\** : Workshop specific branch.
-  - This is needed for keeping *.gitpod.yml*.
-  - `.gitpod.yml` is a configu file that has workspace creation settings in it for a repo
+## Tags
+
+- *main* : Main branch which is central to the workshop. All assets should be created and update on
+- *ws/\** : Workshop specific tag.
+  - This is needed for keeping *.gitpod.yml*
+  - `.gitpod.yml` is a configuration file that has workspace creation settings in it for a repo
   - Gitpod does not have a way of specifying `.gitpod.yml` location in repo.
   - `.gitpod.yml` is required to be in root of the repo.
 
 
 ## How to make changes in a workshops
 
-*DO NOT EDIT workshop branch (ws/\*)*
+- You should make change on ws/* folder for each workshop
+- Ones all the changes are done, run `bin/workshop.sh prepare` to arrange the tags properly
 
-*DO NOT EDIT workshop branch (ws/\*)*
+Example
 
-*DO NOT EDIT workshop branch (ws/\*)*
+Objective: Update instructions for dsql lab.
+Steps:
+1. Open the repository on gitpod.
+2. Open the `ws/dsql/README.md` and make changes
+   1. Optionally, test all the changes
 
-- You should make change on the main branch for each workshop.
-- And recreate the branches. This is easiest way to keep everything clean.
-- You could make changes on workspace branch and then merge it on to the main branch before recreating workshop branches
-
-Example:
-
-You want to update the `ws/dsql/README.md` with additional steps, sqls, intructions etc.
-
-- You can open that branch in gitpod
-- Make change and test everything
-- Merge changes from that branch on to main.
-- Change to main branch
-- Run `bin/workshop.sh ws-branches-recreate`
-  - This will delete all branches locally and on github
+- Run `bin/workshop.sh prepare`
+  - This will copy `ws/*/.gitpod.yml` to `.gitpod.yml`
+  - Adds it to the git and commits
+  - Moves the `ws/*` tag
+  - Pushes commits and tags to git repo
   - Recreate all branches from the head
   - On each workspace branch copies `./ws/*/.gitpod.yml` to `./.gitpod.yml`
 
 
 ## How to add a new  workshops
 
-- Add a new folder under `ws/` directory.
-- Add a .gitpod.yml file in it.
-- You can copy on from the existing workshop for quick start
+- A workshop can be designed under `ws/` folder
+  - It should have at least two files:
+    - `.gitpod.yml` - Gitpod workspace config file.
+    - `README.md` - Workshop instructions
+  - Any other assets (sql files, docker compose file, etc.)
+  - You can copy on from the existing workshop for quick start
 - Update the [README.md](README.md)
+  - Add a link  at the bottom
+
+      ```md
+      [gp-myws]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/myws
+      [doc-myws]: ws/myws/README.md
+      ```
+
   - Add a row for the new workshop
-- Run `bin/workshop.sh ws-branches-recreate` to create workshop
+
+      ```md
+      | ![Ops][badge-ops] | [My Workshop][doc-myws] | [![Open in Gitpod][logo-gitpod]][gp-myws] |
+      ```
+
+      Add badge as per the workshop target audience
+- Run `bin/workshop.sh prepare` to setup the tags
 
 
-## How to fork this
+## How to fork this repository
 
 - Fork [this][repo-workshop] repo, all branch
-- Update refs in
+- Update github repository refs in
   - [README.md](README.md)
   - [README-legacy.md](README-legacy.md)
   - [WORKSHOP-INSTRUCTOR.md](WORKSHOP-INSTRUCTOR.md) (this file)
@@ -67,7 +82,7 @@ You want to update the `ws/dsql/README.md` with additional steps, sqls, intructi
   - [ybdb-workshop-sealed-secrets][repo-sealed-secrets]
 
 
-[gp-workshop]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop 
+[gp-workshop]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop
 [repo-workshop]: https://github.com/yogendra/ybdb-workshop
 [repo-boot-data]: https://github.com/yogendra/ybdb-workshop-boot-data
 [repo-cdc-streams]: https://github.com/yogendra/ybdb-workshop-cdc-streams
