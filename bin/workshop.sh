@@ -14,19 +14,22 @@ YBDB_WORKSHOP_IMAGE_REGISTRIES=(docker.io/yogendra ghcr.io/yogendra quay.io/yoge
 
 function prepare(){
 
-  gitpod_ymls=($(find ws -name .gitpod.yml -maxdepth 2 -type f))
-  gitpod_ymls+=( ".gitpod-main.yml" )
+  gitpod_ymls=($(find ws -name .gitpod.yml -maxdepth 2 -type f | sort))
 
   for gitpod_yml in ${gitpod_ymls[@]}
   do
     tag_name=$(dirname $gitpod_yml)
-    [[ $tag_name == "." ]] && tag_name="root"
+    echo Gitpod Config:$gitpod_yml Tag: $tag_name
     cp $gitpod_yml $PROJECT_DIR/.gitpod.yml
     git add -f .gitpod.yml
     git commit -m "Prepare [$tag_name]"
     git tag -f $tag_name
   done
-  git push --tags origin
+  cp .gitpod-main.yml .gitpod.yml
+  git add -f .gitpod.yml
+  git commit -sm "Prepare main"
+  git push
+  git push --force --tags origin
 }
 
 function gitpod-workspace-image-build(){
