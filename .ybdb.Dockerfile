@@ -2,6 +2,7 @@ FROM gitpod/workspace-full
 
 ARG YB_RELEASE=2.20.0.0-b76
 ARG YB_BIN_PATH=/usr/local/yugabyte
+ARG PYTHON_VERSION=3.9
 ARG ROLE=gitpod
 
 USER $ROLE
@@ -11,14 +12,14 @@ RUN sudo mkdir -p $YB_BIN_PATH
 # set permission
 RUN sudo chown -R $ROLE:$ROLE /usr/local/yugabyte
 
+RUN pyenv install ${PYTHON_VERSION} \
+	&& pyenv global ${PYTHON_VERSION}
+
 # fetch the binary
 RUN set -e \
   && export YB_RELEASE=${YB_RELEASE} \
   && export YB_VERSION=${YB_RELEASE%-*} \
-  && export YB_OS=linux \
-  && export YB_ARCH=x86_64 \
-  && if [[ $(uname -m) == aarch64  ]]; then export YB_OS=el8 YB_ARCH=aarch64 ; fi \
-  && curl -sSLo ./yugabyte.tar.gz https://downloads.yugabyte.com/releases/${YB_VERSION}/yugabyte-${YB_RELEASE}-${YB_OS}-${YB_ARCH}.tar.gz \
+  && curl -sSLo ./yugabyte.tar.gz https://downloads.yugabyte.com/releases/${YB_VERSION}/yugabyte-${YB_RELEASE}-linux-x86_64.tar.gz \
   && tar -xvf yugabyte.tar.gz -C $YB_BIN_PATH --strip-components=1 \
   && chmod +x $YB_BIN_PATH/bin/* \
   && rm ./yugabyte.tar.gz
