@@ -1,24 +1,20 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
-    env:
-      DATA_PATH: ybdb
     command: |
-      mkdir -p ${GITPOD_REPO_ROOT}/${DATA_PATH}
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/${DATA_PATH} --advertise_address=$HOST --cloud_location=ybcloud.pandora.az1 --background=true
+      mkdir -p ${GITPOD_REPO_ROOT}/ybdb
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd2 --advertise_address=$HOST_LB2 --join=$HOST_LB --cloud_location=ybcloud.pandora.az2 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd3 --advertise_address=$HOST_LB3 --join=$HOST_LB --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone
+      yugabyted configure data_placement --fault_tolerance=zone --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1
+      gp sync-done ybdb
   - name: ysqlsh
-    command: |
-      gp ports await ${YSQL_SOCK} && sleep 2
-      ysqlsh -f ${GITPOD_REPO_ROOT}/ws/iloop/init.sql
-      ysqlsh
-  - name: dev-inner-loop
     env:
-      APP_ID: ybdbapp
-    init: |
-      npm install -g generator-jhipster-yugabytedb
+      DATA_PATH: "ws/qt"
     command: |
-      mkdir -p ${GITPOD_REPO_ROOT}/${APP_ID} && cd ${GITPOD_REPO_ROOT}/${APP_ID}
-      echo "Run 'ybdb | yugabytedb' to get started!"
+      gp sync-await ybdb && sleep 2
+      ysqlsh -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/chinook.sql -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/sample.sql
+      ysqlsh
 
 vscode:
   extensions:
@@ -49,9 +45,6 @@ ports:
     onOpen: ignore
   - port: 12000
     name: ycql-api
-    onOpen: ignore
-  - port: 8080
-    name: app
     onOpen: ignore
   - port: 15433
     name: yugabyted-ui
