@@ -28,3 +28,4 @@ replay_pid*
 ybdb/
 confluent/
 yb-sample-apps.jar
+.cargo/
