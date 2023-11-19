@@ -118,7 +118,7 @@ function gitpod-workspace-image-build(){
 
   docker buildx build \
     --build-arg YB_RELEASE=$release \
-    --platform linux/x86_64,linux/arm64 \
+    --platform linux/x86_64 \
     --push \
     $tags \
     -f .ybdb.Dockerfile \
