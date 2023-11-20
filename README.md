@@ -35,7 +35,7 @@
 [doc-ms-data]: https://github.com/yogendra/ybdb-workshop-ms-data/blob/main/README.md
 [doc-qt]: ws/qt/README.md
 [doc-scale]: ws/scale/README.md
-[doc-sealed-secret]: https://github.com/yogendra/ybdb-workshop-sealed-secrets/README.md
+[doc-sealed-secret]: https://github.com/yogendra/ybdb-workshop-sealed-secrets/blob/main/README.md
 [doc-voyager]: ws/voyager/README.md
 [gp-boot-data]:https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-boot-data
 [gp-cdc-streams]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-cdc-streams
