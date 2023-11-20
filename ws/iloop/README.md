@@ -2,10 +2,7 @@
 
 [Back to Workshop Home](../../README.md)
 
-Run the following from `dev-inner-loop` shell
+Run `ybdb` / `yugabytedb` in the `dev-inner-loop` shell
 
-```
-ybdb | yugabytedb
-```
 
 [Back to Workshop Home](../../README.md)
