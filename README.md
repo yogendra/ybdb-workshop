@@ -25,14 +25,14 @@
 
 [badge-dev]: https://img.shields.io/badge/dev-orange?style=for-the-badge
 [badge-ops]: https://img.shields.io/badge/ops-blue?style=for-the-badge
-[doc-boot-data]:https://github.com/yogendra/ybdb-workshop-boot-data/README.md
-[doc-cdc-streams]: https://github.com/yogendra/ybdb-workshop-cdc-streams/README.md
+[doc-boot-data]:https://github.com/yogendra/ybdb-workshop-boot-data/blob/main/README.md
+[doc-cdc-streams]: https://github.com/yogendra/ybdb-workshop-cdc-streams/blob/main/README.md
 [doc-cdc]: ws/cdc/README.md
 [doc-dsql]: ws/dsql/README.md
 [doc-ft]: ws/ft/README.md
 [doc-iloop]: ws/iloop/README.md
 [doc-main]: main/README.md
-[doc-ms-data]: https://github.com/yogendra/ybdb-workshop-ms-data/README.md
+[doc-ms-data]: https://github.com/yogendra/ybdb-workshop-ms-data/blob/main/README.md
 [doc-qt]: ws/qt/README.md
 [doc-scale]: ws/scale/README.md
 [doc-sealed-secret]: https://github.com/yogendra/ybdb-workshop-sealed-secrets/README.md
