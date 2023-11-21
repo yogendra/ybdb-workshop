@@ -3,18 +3,51 @@ tasks:
   - name: ybdb
     command: |
       mkdir -p ${GITPOD_REPO_ROOT}/ybdb
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd2 --advertise_address=$HOST_LB2 --join=$HOST_LB --cloud_location=ybcloud.pandora.az2 --fault_tolerance=zone
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd3 --advertise_address=$HOST_LB3 --join=$HOST_LB --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd2 --advertise_address=$HOST_LB2 --join=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az2 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd3 --advertise_address=$HOST_LB3 --join=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone
       yugabyted configure data_placement --fault_tolerance=zone --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1
       gp sync-done ybdb
   - name: ysqlsh
-    env:
-      DATA_PATH: "ws/qt"
     command: |
-      gp sync-await ybdb && sleep 2
-      ysqlsh -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/chinook.sql -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/sample.sql
+      gp sync-await ybdb && gp ports await 5433 && sleep 2
       ysqlsh
+  - name: ycqlsh
+    command: |
+      gp sync-await ybdb && gp ports await 9042 && sleep 2
+      ycqlsh
+
+  - name: download-load-app
+    command: |
+      wget https://github.com/YugabyteDB-Samples/yb-workload-simulator/releases/download/v0.0.7/yb-workload-sim-0.0.7.jar
+      gp sync-done load-app
+      exit 0
+  - name: ysql-load
+    env:
+      SECRET: yugabyte
+      USER: yugabyte
+    command: |
+      gp sync-await load-app && gp sync-await ybdb && sleep 2
+      java -jar yb-workload-sim-0.0.7.jar  \
+        --spring.datasource.hikari.data-source-properties.serverName=${HOST_LB} \
+        --spring.datasource.hikari.data-source-properties.portNumber=${YSQL_SOCK} \
+        --spring.datasource.hikari.data-source-properties.additionalEndpoints=${HOST_LB2}:${YSQL_SOCK},${HOST_LB3}:${YSQL_SOCK} \
+        --spring.datasource.hikari.data-source-properties.topologyKeys=ybcloud.pandora.\*  \
+        --spring.datasource.hikari.username=${USER}  \
+        --spring.datasource.hikari.password=${SECRET}
+
+  - name: ybdb-scale
+    env:
+      SCRIPT_PATH: ws/scale
+    before: |
+      sudo apt-get install pv -y
+      curl -ssLo ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/pscript https://raw.githubusercontent.com/paxtonhare/demo-magic/master/demo-magic.sh
+      chmod +x ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/pscript
+      chmod +x ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/prompt.sh
+      cd ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}
+    command: |
+      gp sync-await ybdb
+      bash prompt.sh
 
 vscode:
   extensions:
@@ -37,6 +70,9 @@ ports:
   - port: 5433
     name: ysql
     onOpen: ignore
+  - port: 9042
+    name: ycql
+    onOpen: ignore
   - port: 13000
     name: ysql-api
     onOpen: ignore
@@ -48,4 +84,7 @@ ports:
     onOpen: ignore
   - port: 15433
     name: yugabyted-ui
+    onOpen: ignore
+  - port: 8080
+    name: workload-simulator
     onOpen: ignore
