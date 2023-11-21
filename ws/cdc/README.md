@@ -69,5 +69,39 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
 }'
 ```
 
+### Test CDC
+
+On `ysqlsh` shell run following command to see Media Type table content
+
+```sql
+SELECT * from MediaType;
+```
+
+On `psqlsh` shell run following command to see Media Type table content
+
+```sql
+SELECT * from MediaType;
+```
+
+On `ysqlsh` shell run following command to insert a record in Media Type table
+
+```sql
+INSERT INTO MediaType values (1, 'Test');
+```
+
+And see the updated table content
+
+```sql
+SELECT * from MediaType;
+```
+
+Now, on the `psqlsh` shell run following command to see the content of Media Type table. You should see the new record on psql now.
+
+
+```sql
+SELECT * from MediaType;
+```
+
+
 
 [Back to Workshop Home](../../README.md)
