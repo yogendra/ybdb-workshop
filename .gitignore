@@ -30,3 +30,4 @@ confluent/
 yb-sample-apps.jar
 .cargo/
 ybdbapp/
+voyager-data/
