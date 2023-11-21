@@ -19,6 +19,7 @@
 | ![Dev][badge-dev]![Ops][badge-ops] | [Change data capture(CDC) workflow from ybdb to postgres][doc-cdc]               | [![Open in Gitpod][logo-gitpod]][gp-cdc]           |
 | ![Dev][badge-dev]                  | [Change data capture(CDC) streaming workflow from ysql to ycql][doc-cdc-streams] | [![Open in Gitpod][logo-gitpod]][gp-cdc-streams]   |
 | ![Ops][badge-ops]                  | [Data distribution and scalability][doc-scale]                                   | [![Open in Gitpod][logo-gitpod]][gp-scale]         |
+| ![Ops][badge-ops]                  | [Data distribution and scalability V2 (Beta)][doc-scale]                         | [![Open in Gitpod][logo-gitpod]][gp-scale-v2]      |
 | ![Ops][badge-ops]                  | [Data replication, fault tolerance and high availability][doc-ft]                | [![Open in Gitpod][logo-gitpod]][gp-ft]            |
 <!-- Add workshop  here -->
 
@@ -35,6 +36,7 @@
 [doc-ms-data]: https://github.com/yogendra/ybdb-workshop-ms-data/blob/main/README.md
 [doc-qt]: ws/qt/README.md
 [doc-scale]: ws/scale/README.md
+[doc-scale-v2]: ws/scale-v2/README.md
 [doc-sealed-secret]: https://github.com/yogendra/ybdb-workshop-sealed-secrets/blob/main/README.md
 [doc-voyager]: ws/voyager/README.md
 [gp-boot-data]:https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-boot-data
@@ -47,6 +49,7 @@
 [gp-ms-data]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-ms-data
 [gp-qt]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/qt
 [gp-scale]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/scale
+[gp-scale-v2]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/scale-v2
 [gp-sealed-secret]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-sealed-secrets
 [gp-voyager]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/voyager
 [logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
