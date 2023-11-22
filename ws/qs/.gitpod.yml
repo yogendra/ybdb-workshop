@@ -1,0 +1,44 @@
+image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
+tasks:
+  - name: ybdb
+    command: |
+      echo "Type commands here"
+
+
+
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+
+# exposed ports
+ports:
+  - port: 7000
+    name: yb-master-web
+    onOpen: ignore
+  - port: 9000
+    name: yb-tserver-web
+    onOpen: ignore
+  - port: 7100
+    name: yb-master-rpc
+    onOpen: ignore
+  - port: 9100
+    name: yb-tserver-rpc
+    onOpen: ignore
+  - port: 5433
+    name: ysql
+    onOpen: ignore
+  - port: 9042
+    name: ycql
+    onOpen: ignore
+  - port: 13000
+    name: ysql-api
+    onOpen: ignore
+  - port: 9042
+    name: ycql
+    onOpen: ignore
+  - port: 12000
+    name: ycql-api
+    onOpen: ignore
+  - port: 15433
+    name: yugabyted-ui
+    onOpen: ignore
