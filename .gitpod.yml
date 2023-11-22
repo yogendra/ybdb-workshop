@@ -1,24 +1,10 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
-    env:
-      DATA_PATH: ybdb
     command: |
-      mkdir -p ${GITPOD_REPO_ROOT}/${DATA_PATH}
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/${DATA_PATH} --advertise_address=$HOST --cloud_location=ybcloud.pandora.az1 --background=true
-  - name: ysqlsh
-    command: |
-      gp ports await ${YSQL_SOCK} && sleep 2
-      ysqlsh -f ${GITPOD_REPO_ROOT}/ws/iloop/init.sql
-      ysqlsh
-  - name: dev-inner-loop
-    env:
-      APP_ID: ybdbapp
-    init: |
-      npm install -g generator-jhipster-yugabytedb
-    command: |
-      mkdir -p ${GITPOD_REPO_ROOT}/${APP_ID} && cd ${GITPOD_REPO_ROOT}/${APP_ID}
-      echo "Run 'ybdb | yugabytedb' to get started!"
+      echo "Type commands here"
+
+
 
 vscode:
   extensions:
@@ -41,6 +27,9 @@ ports:
   - port: 5433
     name: ysql
     onOpen: ignore
+  - port: 9042
+    name: ycql
+    onOpen: ignore
   - port: 13000
     name: ysql-api
     onOpen: ignore
@@ -49,9 +38,6 @@ ports:
     onOpen: ignore
   - port: 12000
     name: ycql-api
-    onOpen: ignore
-  - port: 8080
-    name: app
     onOpen: ignore
   - port: 15433
     name: yugabyted-ui
