@@ -1,85 +1,21 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
-    env:
-      DATA_PATH: ybdb
     command: |
-      mkdir -p ${GITPOD_REPO_ROOT}/${DATA_PATH}
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/${DATA_PATH} --advertise_address=$HOST --cloud_location=ybcloud.pandora.az1 --background=true
-  - name: init-kafka
-    env:
-      KAFKA_VERSION: 7.5.0
-    before: |
-      export CONFLUENT_HOME=${GITPOD_REPO_ROOT}/confluent
-    init: |
-      mkdir -p ${GITPOD_REPO_ROOT}/confluent/
-      curl -O https://packages.confluent.io/archive/7.5/confluent-${KAFKA_VERSION}.tar.gz
-      tar -xzf confluent-${KAFKA_VERSION}.tar.gz -C ${CONFLUENT_HOME} --strip-components=1
-      gp sync-done init-kafka
-  - name: init-connect-hub
-    env:
-      JDBC_VERSION: 10.7.4
-      POSTGRES_VERSION: 2.2.1
-      YBDB_CONNECTOR: 1.9.5.y.33.SNAPSHOT
-    before: |
-      export CONFLUENT_HOME=${GITPOD_REPO_ROOT}/confluent
-    init: |
-      gp sync-await init-kafka
-      mkdir -p ${CONFLUENT_HOME}/share/confluent-hub-components
-      ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt --component-dir ${CONFLUENT_HOME}/share/confluent-hub-components confluentinc/kafka-connect-jdbc:${JDBC_VERSION}
-      ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt --component-dir ${CONFLUENT_HOME}/share/confluent-hub-components debezium/debezium-connector-postgresql:${POSTGRES_VERSION}
-      wget https://github.com/yugabyte/debezium-connector-yugabytedb/releases/download/v${YBDB_CONNECTOR}/debezium-connector-yugabytedb-${YBDB_CONNECTOR}.jar
-      mv debezium-connector-yugabytedb-${YBDB_CONNECTOR}.jar ${CONFLUENT_HOME}/share/java/confluent-hub-client/
-      gp sync-done init-connect-hub
-  - name: kafka-run
-    before: |
-      export CONFLUENT_HOME=${GITPOD_REPO_ROOT}/confluent
-    command: |
-      gp sync-await init-connect-hub
-      ${CONFLUENT_HOME}/bin/confluent local services start
-      gp sync-done kafka-run
-  - name: init-postgres
-    env:
-      DATA_PATH: ws/cdc
-    init: |
-      docker compose -f ${DATA_PATH}/compose.yml pull
-    command: |
-      docker compose -f ${DATA_PATH}/compose.yml up
-  - name: psqlsh
-    env:
-      PGUSER: postgres
-      PGPASSWORD: yugabyte
-      PGHOST: 127.0.0.1
-    init: |
-      sudo apt-get update
-      sudo apt-get install -y postgresql-contrib
-    command: |
-      gp ports await 5432
-      psql
+      mkdir -p ${GITPOD_REPO_ROOT}/ybdb
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd2 --advertise_address=$HOST_LB2 --join=$HOST_LB --cloud_location=ybcloud.pandora.az2 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd3 --advertise_address=$HOST_LB3 --join=$HOST_LB --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone
+      yugabyted configure data_placement --fault_tolerance=zone --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1
+      gp sync-done ybdb
   - name: ysqlsh
-    env:
-      DATA_PATH: ws/cdc
-    before: |
+    command: |
       gp ports await ${YSQL_SOCK} && sleep 2
-      ysqlsh -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/chinook.sql
-    command: |
       ysqlsh
-  - name: connector-config
-    env:
-      SRC_USER: yugabyte
-      SRC_SECRET: yugabyte
-      SRC_DB_OBJECT: yugabyte
-      TAR_USER: postgres
-      TAR_SECRET: yugabyte
-      TAR_DB_OBJECT: postgres
-      MASTERS: 127.0.0.1:7100
-      TOPIC_PREFIX: sample
-      SCHEMA: public
-    before: |
-      export CONFLUENT_HOME=${GITPOD_REPO_ROOT}/confluent
+  - name: ycqlsh
     command: |
-      gp sync-await kafka-run
-      echo "Apply connector config in this shell!"
+      gp ports await ${YCQL_SOCK} && sleep 2
+      ycqlsh
 
 vscode:
   extensions:
@@ -113,33 +49,6 @@ ports:
     onOpen: ignore
   - port: 12000
     name: ycql-api
-    onOpen: ignore
-  - port: 2181
-    name: zookeeper
-    onOpen: ignore
-  - port: 9092
-    name: kafka-broker
-    onOpen: ignore
-  - port: 8081
-    name: schema-registry
-    onOpen: ignore
-  - port: 8082
-    name: rest-proxy
-    onOpen: ignore
-  - port: 8083
-    name: kafka-connect
-    onOpen: ignore
-  - port: 8088
-    name: ksqldb-rest-api
-    onOpen: ignore
-  - port: 8090
-    name: kafka-broker-mds
-    onOpen: ignore
-  - port: 9021
-    name: control-center
-    onOpen: ignore
-  - port: 5432
-    name: postgres
     onOpen: ignore
   - port: 15433
     name: yugabyted-ui
