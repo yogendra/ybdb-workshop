@@ -18,7 +18,7 @@
 | ![Dev][badge-dev]![Ops][badge-ops] | [Data migration workflow from mysql to ybdb][doc-voyager]                        | [![Open in Gitpod][logo-gitpod]][gp-voyager]       |
 | ![Dev][badge-dev]![Ops][badge-ops] | [Change data capture(CDC) workflow from ybdb to postgres][doc-cdc]               | [![Open in Gitpod][logo-gitpod]][gp-cdc]           |
 | ![Dev][badge-dev]                  | [Change data capture(CDC) streaming workflow from ysql to ycql][doc-cdc-streams] | [![Open in Gitpod][logo-gitpod]][gp-cdc-streams]   |
-| ![Ops][badge-ops]                  | [Data distribution and scalability][doc-scale]                                   | [![Open in Gitpod][logo-gitpod]][gp-scale]         |
+| ![Ops][badge-ops]                  | [Data distribution and scalability][doc-scale-v2]                                   | [![Open in Gitpod][logo-gitpod]][gp-scale]         |
 | ![Ops][badge-ops]                  | [Data distribution and scalability V2 (Beta)][doc-scale]                         | [![Open in Gitpod][logo-gitpod]][gp-scale-v2]      |
 | ![Ops][badge-ops]                  | [Data replication, fault tolerance and high availability][doc-ft]                | [![Open in Gitpod][logo-gitpod]][gp-ft]            |
 <!-- Add workshop  here -->
