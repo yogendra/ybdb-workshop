@@ -1,6 +1,8 @@
 # Into the distributed and postgres++ sql universe
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[![Open in Gitpod][logo-gitpod]][gp-dsql]
 
 ### Xperience the power of YSQL
 
@@ -851,4 +853,8 @@ Run the following from `ycqlsh` shell
 
     </details>
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[home]: ../../README.md
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
+[gp-dsql]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/dsql

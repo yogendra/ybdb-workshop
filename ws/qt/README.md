@@ -1,6 +1,8 @@
 ## Query tuning tips and tricks
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[![Open in Gitpod][logo-gitpod]][gp-qt]
 
 ### explain plan
 
@@ -1289,4 +1291,8 @@ order by sal_per_dept;
 
 </details>
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[home]: ../../README.md
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
+[gp-qt]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/qt

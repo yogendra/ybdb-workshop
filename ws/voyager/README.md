@@ -1,6 +1,8 @@
 ## Data migration workflow from mysql to ybdb
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[![Open in Gitpod][logo-gitpod]][gp-voyager]
 
 ### Export schema and data from the source database
 
@@ -74,4 +76,8 @@ yb-voyager import schema --export-dir ${GITPOD_REPO_ROOT}/${DATA_PATH} \
 yb-voyager import data status --export-dir ${GITPOD_REPO_ROOT}/${DATA_PATH}
 ```
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[home]: ../../README.md
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
+[gp-voyager]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/voyager

@@ -1,6 +1,8 @@
 # YugabyteDB Quick Start Lab
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[![Open in Gitpod][logo-gitpod]][gp-qs]
 
 **Adapted from [YugabyteDB / Quick Start / Linux](doc-yb-qs)**
 
@@ -535,4 +537,8 @@ Run commands in the `ybdb` shell
 
 
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[home]: ../../README.md
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
+[gp-qs]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/qs

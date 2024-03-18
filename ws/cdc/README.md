@@ -1,6 +1,8 @@
 ## Change data capture workflow from ybdb to postgres
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[![Open in Gitpod][logo-gitpod]][gp-cdc]
 
 Run the following from `connector-config` shell
 
@@ -104,4 +106,8 @@ SELECT * from MediaType;
 
 
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[home]: ../../README.md
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
+[gp-cdc]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/cdc

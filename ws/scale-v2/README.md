@@ -1,6 +1,8 @@
 ## Data sharding and horizontal scalability
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[![Open in Gitpod][logo-gitpod]][gp-scale-v2]
 
 - Open the workload-simulator url (from the ports tab)
 - Click on the *three bar* menu on top-left
@@ -18,4 +20,8 @@
 - Run the DB scale out task via `ybdb-scale` shell
   - After each scale command, see the network graph updated in workload simulator
 
-[Back to Workshop Home](../../README.md)
+[Back to Workshop Home][home]
+
+[home]: ../../README.md
+[logo-gitpod]: https://gitpod.io/button/open-in-gitpod.svg
+[gp-scale-v2]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/scale-v2
