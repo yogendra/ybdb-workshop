@@ -1,6 +1,7 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
+    before: gp open ${GITPOD_REPO_ROOT}/ws/scale/README.md
     command: |
       mkdir -p ${GITPOD_REPO_ROOT}/ybdb
       yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone

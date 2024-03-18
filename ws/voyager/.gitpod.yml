@@ -1,6 +1,7 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
+    before: gp open ${GITPOD_REPO_ROOT}/ws/voyager/README.md
     env:
       DATA_PATH: ybdb
     command: |

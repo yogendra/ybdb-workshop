@@ -3,6 +3,7 @@ tasks:
   - name: ybdb
     env:
       DATA_PATH: ybdb
+    before: gp open ${GITPOD_REPO_ROOT}/ws/cdc/README.md
     command: |
       mkdir -p ${GITPOD_REPO_ROOT}/${DATA_PATH}
       yugabyted start --base_dir=${GITPOD_REPO_ROOT}/${DATA_PATH} --advertise_address=$HOST --cloud_location=ybcloud.pandora.az1 --background=true
