@@ -56,11 +56,12 @@ tasks:
   - name: C1-ysqlsh
     command: |
       gp sync-await ybdb
-      ysqlsh -h $HOST_LB
-  - name: C1-ysqlsh
+      ysqlsh -h $HOST_LB -d demo
+  - name: C2-ysqlsh
     command: |
       gp sync-await ybdb
-      ysqlsh -h $HOST_LB4
+      ysqlsh -h $HOST_LB4 -d demo
+    openMode: split-right
 
 vscode:
   extensions:
