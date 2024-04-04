@@ -5,9 +5,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PROJECT_DIR=$(cd $SCRIPT_DIR/..; pwd)
 SCRIPT=$0
 SCRIPT_NAME=$(basename $SCRIPT)
-YB_VERSION_COMMON=(2.20.0.0 2.19.3.0 2.18.4.2 2.16.8.0 2.14.14.0 2.12.12.0)
-YB_VERSION_DEFAULT=2.20.0.0
-YB_RELEASE_DEFAULT=2.20.0.0-b76
+YB_VERSION_COMMON=(2.21.0.0 2.20.2.2 2.19.3.0 2.18.7.0 2.16.9.0 2.14.15.0 2.13.2.0)
+YB_VERSION_DEFAULT=2.20.2.2
+YB_RELEASE_DEFAULT=2.20.2.2-b1
 YBDB_WORKSHOP_IMAGE_NAME=ybdb-workshop-gitpod-ws
 YBDB_WORKSHOP_IMAGE_REGISTRIES=(docker.io/yogendra ghcr.io/yogendra quay.io/yogendra)
 
@@ -36,6 +36,7 @@ function gitpod-workspace-image-build(){
   version=${1:-$YB_VERSION_DEFAULT}
   image_name=$YBDB_WORKSHOP_IMAGE_NAME
   release=$(_ybdb_release $version)
+
   image_tag=$release
   export registries=("${YBDB_WORKSHOP_IMAGE_REGISTRIES[@]}")
 
@@ -90,7 +91,7 @@ function gitpod-workspace-image-build-common-versions(){
 
 function _ybdb_release(){
   version=$1
-  curl -sSL https://registry.hub.docker.com/v2/repositories/yugabytedb/yugabyte/tags?name=$version |  grep -Eo "$version-b[0-9]+"
+  curl -sSL https://registry.hub.docker.com/v2/repositories/yugabytedb/yugabyte/tags?name=$version |  grep -Eo "$version-b[0-9]+" | head -1
 }
 
 
