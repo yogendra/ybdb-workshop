@@ -22,6 +22,7 @@
 | ![Ops][badge-ops]                  | [Data distribution and scalability][doc-scale]                                   | [![Open in Gitpod][logo-gitpod]][gp-scale]         |
 | ![Ops][badge-ops]                  | [Data distribution and scalability V2 (Beta)][doc-scale-v2]                      | [![Open in Gitpod][logo-gitpod]][gp-scale-v2]      |
 | ![Ops][badge-ops]                  | [Data replication, fault tolerance and high availability][doc-ft]                | [![Open in Gitpod][logo-gitpod]][gp-ft]            |
+| ![Ops][badge-ops]                  | [XCluster Demo][doc-xcluster]                | [![Open in Gitpod][logo-gitpod]][gp-xcluster]            |
 <!-- Add workshop  here -->
 
 
@@ -37,6 +38,7 @@
 [doc-ms-data]: https://github.com/yogendra/ybdb-workshop-ms-data/blob/main/README.md
 [doc-qs]: ws/qs/README.md
 [doc-qt]: ws/qt/README.md
+[doc-xcluster]: ws/xcluster/README.md
 [doc-scale]: ws/scale/README.md
 [doc-scale-v2]: ws/scale-v2/README.md
 [doc-sealed-secret]: https://github.com/yogendra/ybdb-workshop-sealed-secrets/blob/main/README.md
@@ -51,6 +53,7 @@
 [gp-ms-data]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-ms-data
 [gp-qs]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/qs
 [gp-qt]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/qt
+[gp-xcluster]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/xcluster
 [gp-scale]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/scale
 [gp-scale-v2]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop/tree/ws/scale-v2
 [gp-sealed-secret]: https://gitpod.io/#https://github.com/yogendra/ybdb-workshop-sealed-secrets
