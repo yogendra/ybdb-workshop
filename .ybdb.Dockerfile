@@ -28,7 +28,7 @@ RUN set -e \
 RUN ["/usr/local/yugabyte/bin/post_install.sh"]
 
 # set the execution path and other env variables
-ENV PATH="$YB_BIN_PATH/bin/:$PATH"
+ENV PATH="$YB_BIN_PATH/bin/:$YB_BIN_PATH/postgres/bin:$YB_BIN_PATH/tools:$PATH"
 ENV HOST=127.0.0.1
 ENV HOST_LB=127.0.0.1
 ENV HOST_LB2=127.0.0.2
