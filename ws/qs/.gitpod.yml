@@ -44,3 +44,6 @@ ports:
   - port: 15433
     name: yugabyted-ui
     onOpen: ignore
+  - port: 8080
+    name: app
+    onOpen: open-browser
