@@ -1,12 +1,21 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
-    before: gp open ${GITPOD_REPO_ROOT}/ws/qs/README.md
+    before: gp open ${GITPOD_REPO_ROOT}/ws/qt/README.md
     command: |
-      sudo apt update
-      sudo apt install -qqy openjdk-21-jre-headless
-      curl -sSL https://github.com/YugabyteDB-Samples/yb-workload-simulator/releases/download/v0.0.8/yb-workload-sim-0.0.8.jar -o yb-workload-simulator.jar
-
+      mkdir -p ${GITPOD_REPO_ROOT}/ybdb
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd2 --advertise_address=$HOST_LB2 --join=$HOST_LB --cloud_location=ybcloud.pandora.az2 --fault_tolerance=zone
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd3 --advertise_address=$HOST_LB3 --join=$HOST_LB --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone
+      yugabyted configure data_placement --fault_tolerance=zone --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1
+      gp sync-done ybdb
+  - name: ysqlsh
+    env:
+      DATA_PATH: "ws/qt"
+    command: |
+      gp sync-await ybdb && sleep 2
+      ysqlsh -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/chinook.sql -f ${GITPOD_REPO_ROOT}/${DATA_PATH}/sample.sql
+      ysqlsh
 
 vscode:
   extensions:
@@ -28,9 +37,6 @@ ports:
     onOpen: ignore
   - port: 5433
     name: ysql
-    onOpen: ignore
-  - port: 9042
-    name: ycql
     onOpen: ignore
   - port: 13000
     name: ysql-api
