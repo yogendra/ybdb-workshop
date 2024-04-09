@@ -1,54 +1,47 @@
 image: yogendra/ybdb-workshop-gitpod-ws:2.20.0.0-b76
 tasks:
   - name: ybdb
-    before: gp open ${GITPOD_REPO_ROOT}/ws/scale-v2/README.md
-    command: |
-      mkdir -p ${GITPOD_REPO_ROOT}/ybdb
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1 --advertise_address=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az1 --fault_tolerance=zone
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd2 --advertise_address=$HOST_LB2 --join=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az2 --fault_tolerance=zone
-      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd3 --advertise_address=$HOST_LB3 --join=$HOST_LB --tserver_flags=ysql_num_shards_per_tserver=2,yb_num_shards_per_tserver=2 --cloud_location=ybcloud.pandora.az3 --fault_tolerance=zone
-      yugabyted configure data_placement --fault_tolerance=zone --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1
-      gp sync-done ybdb
-  - name: ysqlsh
-    command: |
-      gp sync-await ybdb && gp ports await 5433 && sleep 2
-      ysqlsh
-  - name: ycqlsh
-    command: |
-      gp sync-await ybdb && gp ports await 9042 && sleep 2
-      ycqlsh
-
-  - name: download-load-app
-    command: |
-      wget https://github.com/YugabyteDB-Samples/yb-workload-simulator/releases/download/v0.0.7/yb-workload-sim-0.0.7.jar
-      gp sync-done load-app
-      exit 0
-  - name: ysql-load
+    before: gp open ${GITPOD_REPO_ROOT}/ws/voyager/README.md
     env:
-      SECRET: yugabyte
-      USER: yugabyte
+      DATA_PATH: ybdb
     command: |
-      gp sync-await load-app && gp sync-await ybdb && sleep 2
-      java -jar yb-workload-sim-0.0.7.jar  \
-        --spring.datasource.hikari.data-source-properties.serverName=${HOST_LB} \
-        --spring.datasource.hikari.data-source-properties.portNumber=${YSQL_SOCK} \
-        --spring.datasource.hikari.data-source-properties.additionalEndpoints=${HOST_LB2}:${YSQL_SOCK},${HOST_LB3}:${YSQL_SOCK} \
-        --spring.datasource.hikari.data-source-properties.topologyKeys=ybcloud.pandora.\*  \
-        --spring.datasource.hikari.username=${USER}  \
-        --spring.datasource.hikari.password=${SECRET}
+      mkdir -p ${GITPOD_REPO_ROOT}/${DATA_PATH}
+      yugabyted start --base_dir=${GITPOD_REPO_ROOT}/${DATA_PATH} --advertise_address=$HOST --cloud_location=ybcloud.pandora.az1 --background=true
 
-  - name: ybdb-scale
+  - name: init-services
     env:
-      SCRIPT_PATH: ws/scale
-    before: |
-      sudo apt-get install pv -y
-      curl -ssLo ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/pscript https://raw.githubusercontent.com/paxtonhare/demo-magic/master/demo-magic.sh
-      chmod +x ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/pscript
-      chmod +x ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}/prompt.sh
-      cd ${GITPOD_REPO_ROOT}/${SCRIPT_PATH}
+      ART_PATH: ws/voyager
+    init: |
+      docker compose -f ${ART_PATH}/compose.yml pull
     command: |
-      gp sync-await ybdb
-      bash prompt.sh
+      docker compose -f ${ART_PATH}/compose.yml up
+
+  - name: mysql
+    env:
+      SRC_USER: root
+      SRC_SECRET: 'yugabyte'
+    init: |
+      sudo apt-get update
+      sudo apt-get install -y mysql-client
+    command: |
+      gp ports await 3306
+      mysql -h ${HOST} -P 3306 -u ${SRC_USER} -p${SRC_SECRET}
+
+  - name: yb-voyager
+    env:
+      DATA_PATH: voyager-data
+      SCHEMA: public
+      SRC_DB_TYPE: mysql
+      SRC_DB_ID: 'Chinook'
+      SRC_USER: root
+      SRC_SECRET: 'yugabyte'
+      TARGET_DB_ID: yugabyte
+      TARGET_USER: yugabyte
+      TARGET_SECRET: yugabyte
+    command: |
+      mkdir -p ${GITPOD_REPO_ROOT}/voyager-data
+      wget -O ./yb-voyager https://raw.githubusercontent.com/yugabyte/yb-voyager/main/docker/yb-voyager-docker && chmod +x ./yb-voyager && sudo mv yb-voyager /usr/local/bin/yb-voyager
+      gp ports await 3306
 
 vscode:
   extensions:
@@ -71,9 +64,6 @@ ports:
   - port: 5433
     name: ysql
     onOpen: ignore
-  - port: 9042
-    name: ycql
-    onOpen: ignore
   - port: 13000
     name: ysql-api
     onOpen: ignore
@@ -83,9 +73,9 @@ ports:
   - port: 12000
     name: ycql-api
     onOpen: ignore
+  - port: 3306
+    name: mysql
+    onOpen: ignore
   - port: 15433
     name: yugabyted-ui
-    onOpen: ignore
-  - port: 8080
-    name: workload-simulator
     onOpen: ignore
