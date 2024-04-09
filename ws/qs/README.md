@@ -207,7 +207,7 @@ Run commands in the `ybdb` shell
 
     </details>
 
-1. Destroy cluster
+1. _(Optional)_ Destroy cluster 
 
     ```bash
     yugabyted destroy
@@ -490,7 +490,7 @@ Run commands in the `ybdb` shell
     </details>
 
 
-1. Destroy cluster
+1. _(Optional)_ Destroy cluster
 
     ```bash
     yugabyted destroy --base_dir=${GITPOD_REPO_ROOT}/ybdb/ybd1
