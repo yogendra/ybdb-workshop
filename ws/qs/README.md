@@ -535,6 +535,14 @@ Run commands in the `ybdb` shell
 
 3. Open the tserver UI for the database, In the *Ports* tab, open the *yb-tserver-web(9000)* URL.
 
+## Run a sample application - Workload Simulator
+
+1. Run application
+
+    ```bash
+    java -jar yb-workload-simulator.jar
+    ```
+
 
 
 [Back to Workshop Home][home]

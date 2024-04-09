@@ -3,6 +3,9 @@ tasks:
   - name: ybdb
     before: gp open ${GITPOD_REPO_ROOT}/ws/qs/README.md
     command: |
+      sudo apt update
+      sudo apt install -qqy openjdk-21-jre-headless
+      curl -sSL https://github.com/YugabyteDB-Samples/yb-workload-simulator/releases/download/v0.0.8/yb-workload-sim-0.0.8.jar -o yb-workload-simulator.jar
 
 
 vscode:
